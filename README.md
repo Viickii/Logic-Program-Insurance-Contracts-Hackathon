@@ -6,7 +6,11 @@ As for our reasoning, we defined clauses by reading the pdf relating to our cont
 Group Name: Chubb Hospital Cash
 
 Names: 
+
 Diego Acevedo
+
 Sophia Escobar
+
 Felipe Fernández
+
 Antonio Rey
