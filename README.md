@@ -3,7 +3,7 @@ Test cases are in made Prolog language because we made our code in Prolog first,
 
 As for our reasoning, we defined clauses by reading the pdf relating to our contract and extracting sentences with conditions which would invalidate either the contract or the specific claim made.
 
-Group Name: Chubb Hospital Cash
+CIA Username: p04_hc_hospital_cash_en_0723
 
 Names: 
 
