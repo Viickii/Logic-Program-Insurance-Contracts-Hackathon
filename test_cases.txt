@@ -1,0 +1,71 @@
+Formato:
+
+reclamacion_valida(Dias_admision, Dias_salida, Diagnostico, DiasDesdeFirma, Justificativo, Edad, Vivo, Contratovigente, Edadfirma, Paga, Divulgacion).
+
+Dias_admision:Days since hospitalization from when the claim related was notified
+Dias_salida: Days since discharge from when proof was provided to contractor
+Diagnostico: Diagnostic/reason from which hospitalization and claim was done
+DiasDesdeFirma: Days since contract was issued to claims date
+Justificativo: If a justification was made in case the claim was notified late to the contractor
+Edad: Age of the contracted
+Vivo: contracted person is alive
+Contratovigente: contract has not caducated, expired, been canceled, lapsed, surrendered, or terminated
+Edadfirma: Age of the contractor when the contract was issued (True if 60 years or less)
+Paga: If the payments been made to the date of the claim
+Divulgacion: Has a divulgation been commited by the contracted person? If false, claim is true.
+
+Test Cases:
+
+reclamacion_valida(10, 25, tratamiento_tonsils, 121, false, 65, true, true, 45, true, false).
+True, every condition is fulfilled.
+
+reclamacion_valida(23, 20, tratamiento_tonsils, 230, true, 64, true, true, 45, true, false).
+True, because even though the claim was reported after the 20 day notice period since hospital admission, justification was provided for tardiness, which makes this claim valid.
+
+reclamacion_valida(23, 20, tratamiento_tonsils, 345, false, 62, true, true, 45, true, false).
+False, because claim was reported after the 20 day period since hospital admission and no justification was provided for such tardiness.
+
+reclamacion_valida(17, 31, tratamiento_tonsils, 150, true, 45, true, true, 45, true, false).
+False, because proof of hospitalization was provided after the 30 day period since hospital discharge.
+
+reclamacion_valida(6, 8, tratamiento_hiv, 246, false, 27, true, true, 45, true, false).
+False, because treatments related to HIV are not covered by this policy.
+
+reclamacion_valida(13, 10, tratamiento_pneumonia, 31, true, 48, true, true, 45, true, false).
+True, pneumonia related treatments are not excluded from this policy and are not included in the waiting period extension, so since the 30 days waiting period is accomplished, this claim is valid.
+
+reclamacion_valida(13, 10, tratamiento_gastritis, 25, true, 48, true, true, 45, true, false).
+False, the 30 day waiting period was not accomplished, hence claim is invalid.
+
+reclamacion_valida(31, 17, tratamiento_tonsils, 45, true, 53, true, true, 45, true, false).
+False, tonsils related treatment is included in the waiting period extension, which was not accomplished in this claim.
+
+reclamacion_valida(19, 24, tratamiento_preexistente, 31, false, 48, true, true, 45, true, false).
+False, because treatments related to pre-existent conditions are not covered by this policy
+
+reclamacion_valida(12, 8, tratamiento_accidente, 2, false, 41, true, true, 41, true, false).
+True, because treatments related to accidents are covered by this policy, regardless of the waiting period.
+
+reclamacion_valida(13, 10, tratamiento_pneumonia, 31, true, 48, false, true, 45, true, false).
+False, because client is dead, hence the contract is terminated and this claim is invalid.
+
+reclamacion_valida(13, 10, tratamiento_pneumonia, 31, true, 48, true, true, 45, true, false).
+True, because a divulgation was not commited, which makes this contract valid still, and every other condition is fulfilled.
+
+reclamacion_valida(13, 10, tratamiento_pneumonia, 31, true, 48, true, false, 45, true, false).
+False, because the contract has caducated, been cancelled, terminated, lapsed or surrendered, which makes this contract and this claim invalid.
+
+reclamacion_valida(13, 10, tratamiento_pneumonia, 31, true, 63, true, true, 61, true, false).
+False, because the contract was signed after the allowed age of 60, hence invalidating this contract and this claim.
+
+reclamacion_valida(13, 10, tratamiento_pneumonia, 31, true, 48, true, true, 45, false, false).
+False, because the non-payment of this contract invalidates it, and this claims' payment as well.
+
+reclamacion_valida(13, 10, tratamiento_pneumonia, 31, true, 48, true, true, 45, true, true).
+False, because a divulgation has been commited and this contract has been invalidated as a consequence, hence invalidating this claim as well.
+
+reclamacion_valida(13, 10, tratamiento_pneumonia, 31, true, 48, true, true, 45, false, false).
+False, because the non-payment of this contract invalidates it, and this claims' payment as well.
+
+reclamacion_valida(13, 10, tratamiento_tonsils, 31, true, 48, true, false, 45, true, true).
+False, because the waiting period for tonsils is extended to 120 days after the contract is issued and this has not been accomplished, this contract has caducated, been cancelled, terminated, lapsed or surrendered, and a divulgation has been commited and this contract has been invalidated as a consequence of these conditions being unfulfilled, hence invalidating this claim as well.
